@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -13,7 +12,6 @@ def signup(request):
             user = form.save()
             # Authenticate and login
             login(request, user)
-            messages.success(request, "You Have Been Successfuly Register Wellcome!!!")
             return redirect('userprofile:login')
     else:
         form = CustomUserCreationForm()
@@ -29,10 +27,7 @@ def custom_login(request):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, 'You have been successfully logged in.')
                 return redirect('userprofile:dashboard')
-            else:
-                messages.error(request, 'Invalid email or password.')
     else:
         form = LoginForm()
     return render(request, 'userprofile/login.html', {'form': form})
@@ -46,5 +41,4 @@ def dashboard(request):
 @login_required
 def logout(request):
     auth_logout(request)
-    messages.success(request, 'You have been successfully logged out.')
     return redirect('userprofile:login')

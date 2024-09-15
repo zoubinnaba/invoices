@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from .forms import ProductCategoryForm, ProductForm
@@ -15,7 +14,6 @@ def create_category(request):
             category = form.save(commit=False)
             category.user = request.user
             category.save()
-            messages.success(request, "You Have Been Successfully Create a Category")
             return redirect('product:list_product')
     else:
         form = ProductCategoryForm()
@@ -32,7 +30,6 @@ def create_product(request):
 
         if form.is_valid():
             form.save()
-            messages.success(request, "You have successfully created a product")
             return redirect('product:list_product')
         else:
             print(form.errors)
@@ -46,7 +43,7 @@ def create_product(request):
 @login_required
 def list_product(request):
     product_list = Product.objects.all().order_by('name')
-    paginator = Paginator(product_list, 6)
+    paginator = Paginator(product_list, 4)
 
     page_number = request.GET.get('page')
     products = paginator.get_page(page_number)

@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
@@ -15,10 +14,7 @@ def create_client(request):
             client = form.save(commit=False)
             client.user = request.user
             client.save()
-            messages.success(request, 'You have just add a client!')
             return redirect('client:list_client')
-        else:
-            messages.error(request, f"Error in the form : {form.errors}")
     else:
         form = ClientForm()
     return render(request, 'client/create_client.html', {'form': form})

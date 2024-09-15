@@ -51,10 +51,7 @@
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                // Vider le champ des produits actuels
                 productSelect.innerHTML = '';
-
-                // Ajouter les nouveaux produits au select
                 data.forEach(function(product) {
                     var option = document.createElement('option');
                     option.value = product.id;
