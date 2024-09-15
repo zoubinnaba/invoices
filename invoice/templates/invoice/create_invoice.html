@@ -1,7 +1,6 @@
 {% extends "dashboard.html" %}
 {% block content %}
 <main class="bg-indigo-50/60 w-full py-10 px-3 sm:px-10">
-    <!-- Contenu HTML de la page Add Invoice -->
     <section>
         <div class="p-8">
             <form action="{% url 'invoice:create_invoice' %}" method="post" class="space-y-4">
