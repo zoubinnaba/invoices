@@ -5,3 +5,4 @@
 - Create app : userprofile
 - Create app : client
 - Create app : product
+- Create app : invoice
