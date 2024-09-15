@@ -1,0 +1,79 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<main class="bg-indigo-50/60 w-full py-10 px-3 sm:px-10">
+
+    <!-- Nav -->
+    <nav class="text-lg flex items-center justify-between content-center ">
+        <div class=" font-semibold text-xl text-gray-800 flex space-x-4 items-center">
+            <a href="#">
+                <span class="md:hidden">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
+                    </svg>
+                </span>
+            </a>
+            <span>Products</span>
+        </div>
+
+        <div class="flex space-x-5 md:space-x-10 text-gray-500 items-center content-center text-base ">
+            <a class="px-4 py-2 bg-indigo-100 rounded-md flex items-center space-x-2 text-indigo-500 hover:bg-indigo-200" href="{% url 'product:create_product' %}">
+                <svg class="h-5 w-5 fill-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
+                </svg>
+                <div class="hidden xs:block"><span class="hidden sm:inline-block">Create</span> New</div>
+            </a>
+        </div>
+    </nav> <!-- /Nav -->
+
+    <section class="pt-3">
+        <table class="w-full table-auto">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="px-4 py-2 text-left">Name</th>
+                    <th class="px-4 py-2 text-left">Brand</th>
+                    <th class="px-4 py-2 text-left">Reference</th>
+                    <th class="px-4 py-2 text-left">Category</th>
+                    <th class="px-4 py-2 text-left">Description</th>
+                    <th class="px-4 py-2 text-left">Price</th>
+                    <th class="px-4 py-2 text-left">Tva</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr class="border-b">
+                    <td class="px-4 py-2 text-left align-top">{{ product.name }}</td>
+                    <td class="px-4 py-2 text-left align-top">{{ product.brand }}</td>
+                    <td class="px-4 py-2 text-left align-top">{{ product.reference }}</td>
+                    <td class="px-4 py-2 text-left align-top">{{ product.category.name }}</td>
+                    <td class="px-4 py-2 text-left align-top">{{ product.description }}</td>
+                    <td class="px-4 py-2 text-left align-top">{{ product.price }}</td>
+                    <td class="px-4 py-2 text-left align-top">{{ product.tva }}</td>
+                </tr>
+                {% empty %}
+                <tr class="border-b">
+                    <td class="px-4 py-2 text-left text-center" colspan="7">No products found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination links -->
+        <div class="mt-4 flex justify-center">
+            <div class="flex items-center space-x-2">
+                {% if products.has_previous %}
+                    <a href="?page=1" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">&laquo; First</a>
+                    <a href="?page={{ products.previous_page_number }}" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Previous</a>
+                {% endif %}
+
+                <span class="px-4 py-2 text-gray-700">Page {{ products.number }} of {{ products.paginator.num_pages }}</span>
+
+                {% if products.has_next %}
+                    <a href="?page={{ products.next_page_number }}" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Next</a>
+                    <a href="?page={{ products.paginator.num_pages }}" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Last &raquo;</a>
+                {% endif %}
+            </div>
+        </div>
+    </section> <!-- /Invoice List Table -->
+
+</main>
+{% endblock %}

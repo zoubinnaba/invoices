@@ -1,0 +1,67 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<main class="bg-indigo-50/60 w-full py-10 px-3 sm:px-10">
+    <h1 class="text-2xl font-bold mb-8">Invoice #{{ invoice.id }} - {{ invoice.client.first_name }} {{ invoice.client.last_name }}</h1>
+
+    <!-- Section en deux colonnes -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Première colonne : Formulaire d'ajout d'élément -->
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-semibold mb-4">Add an Item</h2>
+            <form method="POST" action=".">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Add Item
+                </button>
+            </form>
+
+            <!-- Afficher les erreurs de validation du formulaire -->
+            {% if form_errors %}
+                <div class="text-red-500 mt-4">
+                    {{ form_errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Seconde colonne : Liste des éléments ajoutés -->
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-semibold mb-4">Invoice Items</h2>
+            <table class="min-w-full leading-normal">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="px-4 py-2 text-left">Product</th>
+                        <th class="px-4 py-2 text-left">Quantity</th>
+                        <th class="px-4 py-2 text-left">Price</th>
+                        <th class="px-4 py-2 text-left">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in invoice.invoiceitem_set.all %}
+                    <tr class="border-b">
+                        <td class="px-4 py-2 text-left">{{ item.product.name }}</td>
+                        <td class="px-4 py-2 text-left">{{ item.quantity }}</td>
+                        <td class="px-4 py-2 text-left">{{ item.price }}</td>
+                        <td class="px-4 py-2 text-left">
+                            <!-- Lien pour supprimer un élément -->
+                            <a href="{% url 'invoice:delete_invoice_item' item.id %}" class="text-red-500 hover:underline">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="px-4 py-2 text-center text-gray-500">No items added yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Générer le PDF de la facture -->
+    <div class="mt-8 flex justify-center">
+        <a href="{% url 'invoice:generate_invoice_pdf' invoice.id %}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Generate Invoice PDF
+        </a>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice PDF</title>
+    <style>
+        .invoice {
+            text-align: center;
+            font-size: 50px;
+        }
+        .invoice-date {
+            font-size: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        .col-1 {
+            border: 0px solid #000;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .total-row {
+            font-weight: bold;
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .client-info {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .client-info td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        .client-info .col-1 {
+            width: 50%;
+        }
+        .client-info .col-2 {
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    {% load custom_filters %}
+    <div class="header">
+        <h1 class="invoice">Invoice #{{ invoice.id }}</h1>
+        <p class="invoice-date"><strong>Invoice of:</strong> {{ invoice.date }}</p>
+        <table class="client-info">
+            <tr>
+                <td class="col-1">
+                    <p><strong>Client:</strong> {{ invoice.client.first_name }} {{ invoice.client.last_name }}</p>
+                    <p><strong>Email:</strong> {{ invoice.client.email }}</p>
+                    <p><strong>Address:</strong> {{ invoice.client.address }}</p>
+                </td>
+                <td class="col-2">
+                    <p><strong>Postal Code:</strong> {{ invoice.client.postal_code }}</p>
+                    <p><strong>City:</strong> {{ invoice.client.city }}</p>
+                    <p><strong>Phone:</strong> {{ invoice.client.phone }}</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Table of invoice items -->
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in invoice.invoiceitem_set.all %}
+            <tr>
+                <td>{{ item.product.description }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.quantity|mul:item.price }}</td>
+            </tr>
+            {% endfor %}
+            <tr class="total-row">
+                <td colspan="3">Total</td>
+                <td>{{ invoice.invoiceitem_set.all|total_invoice_amount }}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

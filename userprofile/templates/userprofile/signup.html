@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static tailwind_tags %}
+<html lang="en">
+<head>
+    <title>InvoiceApp</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		{% tailwind_css %}
+</head>
+<body>
+<div class="min-h-screen py-20" style="background-image: linear-gradient(115deg, #9F7AEA, #FEE2FE)">
+  <div class="container mx-auto">
+    <!-- wrapper  -->
+    <div class="flex flex-col lg:flex-row w-10/12 lg:w-8/12 bg-white rounded-xl mx-auto shadow-lg overflow-hidden">
+      <!-- left  -->
+      <div class="w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-no-repeat bg-center bg-cover" style="background-image: url('https://jmdevelopments77.files.wordpress.com/2020/11/pexels-photo-572897.jpeg')">
+        <h1 class="text-white text-3xl font-bold mb-3">Welcome</h1>
+        <div>
+          <p class="text-white"> In to the InvoiceApp</p>
+        </div>
+      </div>
+      <!-- right  -->
+      <div class="w-full lg:w-1/2 py-16 px-12">
+        <h2 class="text-3xl mb-4">Sign-up</h2>
+        <p class="mb-4">Create your account. It’s free and only take a minute</p>
+        <form action="." method="post">
+            {% if form.errors %}
+                <div class="text-red" role="alert">
+                    Your Form Has Errors
+                    {% for field in form %}
+                    {% if field.errors %}
+                        {{ field.errors }}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="mt-5">
+              <button class="bg-purple-500 w-full text-center text-white py-3">Sign-up Now</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
