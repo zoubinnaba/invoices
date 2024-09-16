@@ -1,5 +1,6 @@
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.shortcuts import redirect
 from django.urls import path, include
 
 from core import settings
@@ -11,6 +12,9 @@ urlpatterns = [
     path('product/', include('product.urls')),
     path('invoice/', include('invoice.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
+
+    # Redirection for root URL
+    path('', lambda request: redirect('userprofile:login')),
 ]
 
 

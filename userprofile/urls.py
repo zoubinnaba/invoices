@@ -6,8 +6,8 @@ from userprofile.views import logout, signup, custom_login, dashboard
 app_name = 'userprofile'
 
 urlpatterns = [
-    path('log-out/', logout, name="logout"),
-    path('sign-up/', signup, name='signup'),
-    path('log-in/', custom_login, name='login'),
+    path('logout/', logout, name="logout"),
+    path('signup/', signup, name='signup'),
+    path('login/', custom_login, name='login'),
     path('dashboard/', dashboard, name='dashboard'),
 ]
