@@ -19,7 +19,7 @@ LOGOUT_REDIRECT_URL = 'login'
 AUTH_USER_MODEL = 'userprofile.UserProfile'
 
 ALLOWED_HOSTS = [
-    "invoices-production-f737.up.railway.app"
+    "*.railway.app"
 ]
 
 if DEBUG:
