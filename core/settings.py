@@ -18,7 +18,7 @@ LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
 AUTH_USER_MODEL = 'userprofile.UserProfile'
 
-ALLOWED_HOSTS = ['.railway.app']
+ALLOWED_HOSTS = ['disciplined-luck-production.up.railway.app']
 
 if DEBUG:
     ALLOWED_HOSTS += ['127.0.0.1', 'localhost']
