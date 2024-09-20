@@ -25,6 +25,10 @@ if DEBUG:
 
 
 CSRF_TRUSTED_ORIGINS = ['disciplined-luck-production.up.railway.app']
+# Sécuriser les cookies CSRF et session en production
+CSRF_COOKIE_SECURE = True  # Utiliser True si vous avez activé HTTPS sur Railway
+SESSION_COOKIE_SECURE = True  # Sécurise les cookies de session aussi
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 
