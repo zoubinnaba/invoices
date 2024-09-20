@@ -18,7 +18,7 @@ LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
 AUTH_USER_MODEL = 'userprofile.UserProfile'
 
-ALLOWED_HOSTS = ['invoices-production-f737.up.railway.app']
+ALLOWED_HOSTS = ['.railway.app']
 
 if DEBUG:
     ALLOWED_HOSTS += ['127.0.0.1', 'localhost']
