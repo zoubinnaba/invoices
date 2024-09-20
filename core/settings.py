@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'v0&6trqtfluokc*-1$%3jk6$!8($2$++a_6pah=6=nhkw5z^p&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
