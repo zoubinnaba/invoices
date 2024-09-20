@@ -24,6 +24,10 @@ if DEBUG:
     ALLOWED_HOSTS += ['127.0.0.1', 'localhost']
 
 
+CSRF_TRUSTED_ORIGINS = ['disciplined-luck-production.up.railway.app']
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
