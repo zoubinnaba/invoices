@@ -24,7 +24,7 @@ if DEBUG:
     ALLOWED_HOSTS += ['127.0.0.1', 'localhost']
 
 
-CSRF_TRUSTED_ORIGINS = ['disciplined-luck-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://disciplined-luck-production.up.railway.app']
 # Sécuriser les cookies CSRF et session en production
 CSRF_COOKIE_SECURE = True  
 SESSION_COOKIE_SECURE = True
@@ -140,7 +140,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'theme/static'),)
 
 MEDIA_URL = '/media/'
 
