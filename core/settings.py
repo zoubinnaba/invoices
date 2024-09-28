@@ -18,13 +18,13 @@ LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
 AUTH_USER_MODEL = 'userprofile.UserProfile'
 
-ALLOWED_HOSTS = ['disciplined-luck-production.up.railway.app']
+ALLOWED_HOSTS = ['invoices-production-3a86.up.railway.app']
 
 if DEBUG:
     ALLOWED_HOSTS += ['127.0.0.1', 'localhost']
 
 
-CSRF_TRUSTED_ORIGINS = ['https://disciplined-luck-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://invoices-production-3a86.up.railway.app']
 # Sécuriser les cookies CSRF et session en production
 CSRF_COOKIE_SECURE = True  
 SESSION_COOKIE_SECURE = True

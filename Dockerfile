@@ -42,6 +42,8 @@ COPY . /code
 
 # Install the Python project requirements
 RUN pip install -r /tmp/requirements.txt
+RUN python3 manage.py tailwind install
+RUN python3 manage.py tailwind start
 
 # database isn't available during build
 # run any other commands that do not need the database
