@@ -26,6 +26,9 @@ RUN apt-get update && apt-get install -y \
     libcairo2 \
     # other
     gcc \
+    # Install Node.js and npm
+    nodejs \
+    npm \
     && rm -rf /var/lib/apt/lists/*
 
 # Create the mini vm's code directory
@@ -42,6 +45,11 @@ COPY . /code
 
 # Install the Python project requirements
 RUN pip install -r /tmp/requirements.txt
+
+# Debugging step: Check if manage.py exists
+RUN ls -la /code
+
+# Install and start Tailwind CSS
 RUN python3 manage.py tailwind install
 RUN python3 manage.py tailwind start
 
