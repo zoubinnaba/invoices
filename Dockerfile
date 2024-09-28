@@ -16,20 +16,6 @@ RUN pip install --upgrade pip
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Install os dependencies for our mini vm
-RUN apt-get update && apt-get install -y \
-    # for postgres
-    libpq-dev \
-    # for Pillow
-    libjpeg-dev \
-    # for CairoSVG
-    libcairo2 \
-    # other
-    gcc \
-    # Install Node.js and npm
-    nodejs \
-    npm \
-    && rm -rf /var/lib/apt/lists/*
 
 # Create the mini vm's code directory
 RUN mkdir -p /code
@@ -48,16 +34,6 @@ RUN pip install -r /tmp/requirements.txt
 
 # Debugging step: Check if manage.py exists
 RUN ls -la /code
-
-# Install npm dependencies
-RUN npm install
-
-# Debugging step: Check Node.js and npm versions
-RUN node -v && npm -v
-
-# Install and start Tailwind CSS
-RUN python3 manage.py tailwind install
-RUN python3 manage.py tailwind start
 
 # database isn't available during build
 # run any other commands that do not need the database
