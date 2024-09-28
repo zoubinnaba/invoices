@@ -49,6 +49,12 @@ RUN pip install -r /tmp/requirements.txt
 # Debugging step: Check if manage.py exists
 RUN ls -la /code
 
+# Install npm dependencies
+RUN npm install
+
+# Debugging step: Check Node.js and npm versions
+RUN node -v && npm -v
+
 # Install and start Tailwind CSS
 RUN python3 manage.py tailwind install
 RUN python3 manage.py tailwind start
