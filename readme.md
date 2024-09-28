@@ -31,7 +31,7 @@ To install and run the project, make sure you have the following prerequisites:
 4. **Install TailwindCSS with django-tailwind: Run the following commands to install and initialize TailwindCSS for your Django project.**
    1. **Install Tailwind dependencies:**
       ```bash
-      python manage.py tailwind install
+      python3 manage.py tailwind install
    2. **Install Tailwind dependencies:**
       ```bash
       python3 manage.py tailwind start
@@ -42,7 +42,7 @@ To install and run the project, make sure you have the following prerequisites:
 
 6. **Create a superuser (admin account):**
    ```bash
-   python manage.py createsuperuser
+   python3 manage.py createsuperuser
 7. **Run the Django development server:**
    ```bash
    python3 manage.py runserver
